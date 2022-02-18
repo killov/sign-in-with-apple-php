@@ -1,0 +1,23 @@
+{
+    "name": "killov/apple-sign-in",
+    "description": "Apple ID - web sign in",
+    "homepage": "https://github.com/killov/sign-in-with-apple-php",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zdeněk Mazurák"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "web-token/jwt-framework": "^2.0",
+        "guzzlehttp/guzzle": "^7.4",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Killov\\AppleSignIn\\": "src/"
+        }
+    }
+}
