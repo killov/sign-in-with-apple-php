@@ -2,8 +2,6 @@
 
 namespace Killov\AppleSignIn;
 
-use Firebase\JWT\JWT;
-
 class JwtCreator {
 
     /**
