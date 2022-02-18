@@ -2,11 +2,7 @@
 
 namespace Killov\AppleSignIn;
 
-use Jose\Component\Core\AlgorithmManager;
-use Jose\Component\KeyManagement\JWKFactory;
-use Jose\Component\Signature\Algorithm\ES256;
-use Jose\Component\Signature\JWSBuilder;
-use Jose\Component\Signature\Serializer\CompactSerializer;
+use Firebase\JWT\JWT;
 
 class JwtCreator {
 
@@ -47,26 +43,16 @@ class JwtCreator {
      * @return string
      */
     public function create() {
-        $algorithmManager = new AlgorithmManager([new ES256()]);
-        $jwsBuilder = new JWSBuilder($algorithmManager);
+        $payload = [
+            'iat' => time(),
+            'exp' => time() + 360,
+            'iss' => $this->teamId,
+            'aud' => 'https://appleid.apple.com',
+            'sub' => $this->clientId
+        ];
 
-        $jws = $jwsBuilder
-            ->create()
-            ->withPayload(json_encode([
-                'iat' => time(),
-                'exp' => time() + 360,
-                'iss' => $this->teamId,
-                'aud' => 'https://appleid.apple.com',
-                'sub' => $this->clientId
-            ]))
-            ->addSignature(JWKFactory::createFromKeyFile($this->keyPath), [
-                'alg' => 'ES256',
-                'kid' => $this->keyId
-            ])
-            ->build();
+        $key = file_get_contents($this->keyPath);
 
-        $serializer = new CompactSerializer();
-
-        return $serializer->serialize($jws, 0);
+        return JWT::encode($payload, $key, 'ES256', $this->keyId);
     }
 }

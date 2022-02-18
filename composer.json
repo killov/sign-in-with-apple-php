@@ -11,9 +11,9 @@
     ],
     "require": {
         "php": ">= 7.2",
-        "web-token/jwt-framework": "^2.0",
         "guzzlehttp/guzzle": "^6.0|^7.0",
-        "ext-json": "*"
+        "ext-json": "*",
+        "firebase/php-jwt": "^6.0"
     },
     "autoload": {
         "psr-4": {
