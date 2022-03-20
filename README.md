@@ -6,7 +6,7 @@ Library for web sign in over Apple ID.
 
 For install please use composer.
 
-`composer require azimolabs/apple-sign-in-php-sdk`
+`composer require killov/apple-sign-in`
 
 ## Basic usage
 
